@@ -51,6 +51,11 @@ fprintf('Normalizing Features ...\n');
 
 [X mu sigma] = featureNormalize(X);
 
+fprintf(' mu = %f \n', mu);
+fprintf(' sigma = %f \n', sigma);
+fprintf('First 10 examples from the Normalized dataset: \n');
+fprintf(' x = [%.2f %.2f], y = %.0f \n', [X(1:10,:) y(1:10,:)]');
+
 % Add intercept term to X
 X = [ones(m, 1) X];
 
@@ -89,6 +94,19 @@ num_iters = 400;
 theta = zeros(3, 1);
 [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
 
+% theta1 = zeros(3, 1);
+% [theta1, J_history1] = gradientDescentMulti(X, y, theta1, 0.03, 50);
+% theta2 = zeros(3, 1);
+% [theta2, J_history2] = gradientDescentMulti(X, y, theta2, 0.1, 50);
+% theta3 = zeros(3, 1);
+% [theta3, J_history3] = gradientDescentMulti(X, y, theta3, 0.3, 50);
+
+% figure;
+% plot(1:numel(J_history1), J_history1, '-b', 'LineWidth', 2);
+% hold on;
+% plot(1:numel(J_history2), J_history2, '-r', 'LineWidth', 2);
+% plot(1:numel(J_history3), J_history3, '-k', 'LineWidth', 2);
+
 % Plot the convergence graph
 figure;
 plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
@@ -105,7 +123,7 @@ fprintf('\n');
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
 price = 0; % You should change this
-
+price = [1, (([1650, 3] .- mu) ./ sigma)] *theta;
 
 % ============================================================
 
@@ -151,6 +169,7 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 price = 0; % You should change this
 
+price = [1, 1650, 3] *theta;
 
 % ============================================================
 
