@@ -15,11 +15,12 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
+ss = sigmoid(X * theta);
+pass_threshold = find(ss >= 0.5);
 
-
-
-
-
+for pass_threshold_index = pass_threshold
+    p(pass_threshold_index) = 1;
+end
 
 % =========================================================================
 
